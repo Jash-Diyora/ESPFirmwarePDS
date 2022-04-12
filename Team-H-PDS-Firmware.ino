@@ -1,8 +1,6 @@
 #include <Arduino.h>
 #include <Firebase_ESP_Client.h>
-
 #include <ESP8266WiFi.h>
-
 #include <Servo.h>
 
 Servo myservo;
@@ -12,7 +10,6 @@ Servo myservo;
 //#elif defined(ESP8266)
 //#include <ESP8266WiFi.h>
 //#endif
-
 
 //Define Firebase Data object
 FirebaseData fbdo;
@@ -30,11 +27,11 @@ bool signupOK = false;
 //Provide the RTDB payload printing info and other helper functions.
 #include "addons/RTDBHelper.h"
 
-#define WIFI_SSID "Tenda_618090"
-#define WIFI_PASSWORD "rideabove256"
+#define WIFI_SSID "TODO"
+#define WIFI_PASSWORD "TODO"
 
-#define API_KEY "AIzaSyA-J0odHUJxJEkUjTc5xBaJBJsE-xP3J2w"
-#define DATABASE_URL "https://touri-65f07-default-rtdb.firebaseio.com/"
+#define API_KEY "TODO"
+#define DATABASE_URL "TODO"
 
 void setup() {
   Serial.begin(115200);
@@ -72,8 +69,6 @@ void setup() {
   Firebase.reconnectWiFi(true);
 }
 
-
-
 int getMotorCommand() {
   if (Firebase.RTDB.getInt(&fbdo, "/ee_pos")) {
     if (fbdo.dataType() == "int") {
@@ -81,25 +76,19 @@ int getMotorCommand() {
       return value;
     }
   }
-
   return -1;
 }
 
-
-//TODO: add servo logic
 void eePosListerner() {
-
+  //TODO: add servo logic
 }
 
 void loop() {
   if (Firebase.ready() && signupOK) {
-
     int a = getMotorCommand();
     //    eePosListerner(a);
     myservo.write(a);
     Serial.println(a*2);
-
     delay(500);
-
   }
 }
